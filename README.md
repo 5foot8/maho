@@ -1,6 +1,6 @@
 # maho: ADS-B assisted aircraft spotting
 
-# All the credit goes to cnelson, I have modified one line to limit the software following aircraft below 30,000 ft.
+## All the credit goes to cnelson, I have modified one line to limit the software following aircraft below 30,000 ft.
 
 A proof of concept application for aircraft spotting using positional data from ADS-B
  and a PTZ IP camera.
