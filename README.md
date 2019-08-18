@@ -1,6 +1,12 @@
 # maho: ADS-B assisted aircraft spotting
 
-### *All the credit goes to cnelson, I have modified one line to limit the software following aircraft below 30,000 ft.
+### *All the credit goes to cnelson, I have modified to make the software better fit my own personalinterpretation of the software. 
+* Following aircraft above 30,000 ft.[where contrails are more likely to happen]
+* Allow two cameras to work together on two sides of the house
+* Take a picture on request from the live video stream
+* Restart the interface if it appears to freeze
+
+***I have also elimiated the very cleaver aircraft spotting cv2 code which was compromising the speed on my fairly slow PC, its a great concept but doesn't work so well if there is cloud cover, the code would treat every single feature in the clouds as target points - totalling 1,000's.
 
 A proof of concept application for aircraft spotting using positional data from ADS-B
  and a PTZ IP camera.
@@ -13,7 +19,7 @@ and altitude to the aircraft from the camera's position and instructs the camera
 point at that location.
 
 Very basic image analysis is then performed on the video stream from the camera
-to highlight the aircraft.
+to highlight the aircraft.***
 
 # How to use
 
