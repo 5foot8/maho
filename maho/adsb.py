@@ -196,10 +196,14 @@ class Dump1090(ADSBReciver):
                 aircraft.callsign = modes.adsb.callsign(msg).rstrip('_')
 
             if modes.adsb.typecode(msg) == 19:
-
-                aircraft.speed = int(modes.adsb.speed_heading(msg)[0] * 1.15078)  # knots to mph
-
-                aircraft.heading = int(modes.adsb.speed_heading(msg)[1])
+                if modes.adsb.speed_heading(msg) is None:
+                    pass
+                else:
+                    aircraft.speed = int(modes.adsb.speed_heading(msg)[0] * 1.15078)  # knots to mph
+                    aircraft.heading = int(modes.adsb.speed_heading(msg)[1])
+                
+            else:
+                pass
 
             if modes.adsb.typecode(msg) > 8 and modes.adsb.typecode(msg) < 19:
                 aircraft.altitude = modes.adsb.altitude(msg)
