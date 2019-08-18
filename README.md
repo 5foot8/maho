@@ -1,6 +1,6 @@
 # maho: ADS-B assisted aircraft spotting
 
-### *All the credit goes to cnelson, I have modified to make the software better fit my own personalinterpretation of the software. 
+### *All the credit goes to cnelson, I have modified to make the software better fit my own personal requirements for the software. 
 * Following aircraft above 30,000 ft.[where contrails are more likely to happen]
 * Allow two cameras to work together on two sides of the house
 * Take a picture on request from the live video stream
