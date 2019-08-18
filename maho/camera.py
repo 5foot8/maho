@@ -56,6 +56,7 @@ class IPCamera(object):
     and move them in a defined absolute coordinate space so :shrug:...
 
     """
+
     def __init__(self, hostname, port, username, password, azimuth_offset=0.0, altitude_offset=0.0):
         """Connect to an IP Camera that supports the ONVIF protocol
 
@@ -145,16 +146,34 @@ class IPCamera(object):
         elif altitude < 0:
             altitude = 0
 
-        # convert azimuth / altitude to ONVF 0.0-1.0 coordinates
-        if azimuth <= 180:
-            x_target = azimuth / 180.0
-        else:
-            x_target = ((360 - azimuth) / 180.0) * -1
+        # convert azimuth / altitude to ONVF 0.0-1.0 coordinates 720 Camera
 
-        if altitude <= 45:
-            y_target = (45 - altitude) / 45.0
+        if (self.hostname) == ('192.168.1.200'):
+
+            if azimuth <= 180:
+                x_target = azimuth / 180.0
+            else:
+                x_target = ((360 - azimuth) / 180.0) * -1
+
+            if altitude <= 45:
+                y_target = (45 - altitude) / 45.0
+            else:
+                y_target = ((altitude - 45) / 45.0) * -1
         else:
-            y_target = ((altitude - 45) / 45.0) * -1
+            pass
+
+        # convert azimuth / altitude to ONVF 0.0-1.0 coordinates 1080 Camera
+
+        if (self.hostname) == ('192.168.1.202'):
+
+            if azimuth <= 180:
+                x_target = -(azimuth / 180.0)
+            else:
+                x_target = -(((360 - azimuth) / 180.0) * -1)
+
+            y_target = (((altitude / 180.0) * -1))
+        else:
+            pass
 
         try:
             self.ptz_service.AbsoluteMove(
@@ -165,6 +184,7 @@ class IPCamera(object):
                 }
             )
             return (azimuth, altitude)
+
         except ONVIFError as exc:
             raise RuntimeError("Unable to move camera: {}".format(exc))
 
@@ -197,3 +217,4 @@ class IPCamera(object):
 
         except (ONVIFError, KeyError) as exc:
             raise RuntimeError("Unable to retrieve RTSP URL from camera: {}".format(exc))
+
