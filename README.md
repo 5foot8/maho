@@ -18,8 +18,8 @@ This application receives aircraft position updates via ADS-B, calculates the az
 and altitude to the aircraft from the camera's position and instructs the camera to
 point at that location.
 
-Very basic image analysis is then performed on the video stream from the camera
-to highlight the aircraft.***
+***Very basic image analysis is then performed on the video stream from the camera
+to highlight the aircraft.
 
 # How to use
 
@@ -61,8 +61,38 @@ maho \
 
 # Caveats
 
+Original from Nelson:
+
 * This application was written in an afternoon, it is not suitable for any production use.
 * Some tests exist but code coverage is poor.
 * Expect false positives from image analysis especially if the aircraft is near the horizon, or
 the sky is very cloudy.
+
+5Foot8's:
+* The code is written for a very specific install, two cameras, one facing North, one South.
+You should be able to comment out one of the cameras, if you wish to use with single camera.
+* In the two camera setup, the simplest way I could find to inform the code which camera to use 
+was to give a latitude that was fractionally larger for the North facing camera, and slightly
+smaller for the South facing one, so be acurate when stating the co-ordinates, as each side of the
+building will have fractionally different locations. Set your 'my_lat' at the mid-point of the two 
+latitudes.
+* Presently you have to run each camera independatly in two CLI windows, I have yet to learn how
+to combine into a single instance.
+* If running with single camera the code will need to be commented out which selects the
+camera to use.
+* My two cameras are different models but from the same company, unfortunatley the ONVIF commands
+for each camera were slightly different.  I modified the code to identify which camera was 
+requesting the data from IP input and select the appropriate commands for each.  If running single 
+camera you will need to comment out one of the camera selecting modules.
+* Proximity to local airport and wishing to see only 'aircraft-over-the-top' I've limited the
+the minimum height to 30,000 ft. This can be adjusted in the code.
+* I've run the code for many hours and attempted to put checks on all the occurances that can
+cause it to stop running - there may be a couple still in there, it usualy is something to do 
+with data not being available and returning None, which breaks the code.
+* Sometimes for no apprent reason the camera will stop taking the ONVIF commands, I added a restart
+command, just press 'r' on the keyboard, which will hopefully kickstart the feed again, if not
+you will need to run the command again in a new CLI window.
+* If you live in a place where you rarely see clouds and have a really quick PC, you should be able
+with reference to CNelsons original MAHO be able to reinstate the image analysis.
+
 
